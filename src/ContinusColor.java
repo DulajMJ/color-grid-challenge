@@ -12,36 +12,50 @@ public class ContinusColor {
                 {1, 1, 3, 1, 1}};
 
         int row=4;
-        int colums=4;
+        int column=4;
+
+        colorGrid(input, row, column);
+
+
+    }
+
+    private static void colorGrid(int[][] input, int row, int column) {
+
+
         List<ValueXY> result = new ArrayList<ValueXY>();
         List<ValueXY> temp = new ArrayList<ValueXY>();
 
+
         for(int x=0; x<row; x++){
 
-            for(int y=0; y<colums; y++){
+            for(int y=0; y<column; y++){
 
                 temp = new ArrayList<ValueXY>();
-
+                ValueXY xy;
 
                 for(int j=x; j<row; j++){
 
                     if(input[x][j] == input[x+1][j]){
-                        ValueXY xy=new ValueXY(x+1,j);
+                         xy=new ValueXY(x+1,j);
                         temp.add(xy);
+                       // input[x+1][j]=0;
 
                     }
                     if(input[x][j] == input[x][j+1]){
 
-                        ValueXY xy=new ValueXY(x,j+1);
+                        xy=new ValueXY(x,j+1);
                         temp.add(xy);
+                        //input[x][j+1]=0;
                     }
 
                     if(input[x][j] == input[x+1][j] || input[x][j] == input[x][j+1]){
 
-                        ValueXY xy=new ValueXY(x,j);
+                        xy=new ValueXY(x,j);
                         temp.add(xy);
+                        //input[x][j]=0;
 
-                    }else {
+                    }
+                    else {
                         break;
                     }
                 }
@@ -53,19 +67,13 @@ public class ContinusColor {
         }
 
         for (int i = 0; i < row; i++) {
-            for (int j = 0; j < colums; j++) {
+            for (int j = 0; j < column; j++) {
 
-                int  bb=i;
-                int nn=j;
-
-                result.forEach(value->{
-                    if(nn ==value.getX() && bb== value.getY()){
-                        System.out.print(input[bb][nn]);
-                    }else{
-                        System.out.print(" *  ");
-                    }
-
-                });
+                if(input[i][j]==0){
+                    System.out.print("*");
+                }else{
+                    System.out.print(".");
+                }
 
             }
             System.out.println();
